@@ -1,5 +1,5 @@
 import logging
-
+import os
 from dotenv import load_dotenv
 from livekit.agents import (
     Agent,
@@ -36,7 +36,7 @@ class Assistant(Agent):
             instructions="You are a voice assistant created by LiveKit. Your interface with users will be voice. "
             "You should use short and concise responses, and avoiding usage of unpronouncable punctuation. "
             "You were created as a demo to showcase the capabilities of LiveKit's agents framework.",
-            stt=deepgram.STT(),
+            stt=deepgram.STT(api_key=os.getenv("DEEPGRAM_API_KEY")),
             llm=openai.LLM(model="gpt-4o-mini"),
             tts=cartesia.TTS(),
             # use LiveKit's transformer-based turn detector
